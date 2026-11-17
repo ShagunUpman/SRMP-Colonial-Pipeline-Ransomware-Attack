@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Security risk management dashboard analyzing the 2021 Colonial Pipeline ransomware incident.">
+  <title>Colonial Pipeline | Security Risk Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">CP</span><div><b>RISK / INTELLIGENCE</b><small>SECURITY ANALYTICS</small></div></div>
+    <div class="side-label">CASE STUDY</div>
+    <a class="nav-link active" href="#overview">01 &nbsp; Overview</a>
+    <a class="nav-link" href="#register">02 &nbsp; Risk register</a>
+    <a class="nav-link" href="#matrix">03 &nbsp; Risk matrix</a>
+    <a class="nav-link" href="#analysis">04 &nbsp; Analysis</a>
+    <a class="nav-link" href="#controls">05 &nbsp; Mitigation plan</a>
+    <a class="nav-link" href="#timeline">06 &nbsp; Timeline</a>
+    <div class="sidebar-note"><span class="live-dot"></span> HISTORICAL INCIDENT<br><b>7 MAY 2021</b><small>DarkSide ransomware</small></div>
+    <div class="side-foot">SECURITY RISK MANAGEMENT<br>ACADEMIC DASHBOARD · 2026</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">CRITICAL INFRASTRUCTURE / UNITED STATES</span><h1>Colonial Pipeline <span>Ransomware Attack</span></h1></div><div class="top-right"><span class="status-pill">● POST-INCIDENT REVIEW</span><span class="date">CASE FILE / 2021</span></div></header>
+
+    <section id="overview" class="section">
+      <div class="section-head"><div><span class="eyebrow">01 / EXECUTIVE OVERVIEW</span><h2>One compromised account. A nationwide disruption.</h2><p class="subhead">A business-network ransomware incident triggered a precautionary shutdown of a major fuel pipeline.</p></div><div class="source-tag">SOURCE-BASED CASE REVIEW</div></div>
+      <div class="kpi-grid">
+        <article class="kpi"><div class="kpi-label">PIPELINE NETWORK</div><strong>5,500 <small>mi</small></strong><p>Approximate network length</p><span class="kpi-foot">Colonial / U.S. DOT</span></article>
+        <article class="kpi"><div class="kpi-label">DAILY THROUGHPUT</div><strong>2.5M <small>barrels</small></strong><p>Approximate capacity / day</p><span class="kpi-foot">U.S. DOT case study</span></article>
+        <article class="kpi"><div class="kpi-label">RANSOM PAID</div><strong>$4.4M</strong><p>Reported ransom payment</p><span class="kpi-foot">DOJ / congressional record</span></article>
+        <article class="kpi"><div class="kpi-label">CRYPTO SEIZED</div><strong>$2.3M</strong><p>63.7 BTC seized by DOJ</p><span class="kpi-foot">DOJ · 7 June 2021</span></article>
+      </div>
+      <div class="overview-grid">
+        <article class="panel incident-panel"><div class="panel-title"><div><span class="eyebrow">INCIDENT SNAPSHOT</span><h3>What happened?</h3></div><span class="mini-label">CONFIRMED FACTS</span></div>
+          <p>On 29 April 2021, an attacker used an employee username and password through a legacy VPN profile that did not require a one-time passcode. Colonial detected the ransomware incident on 7 May and shut down pipeline operations as a precaution while containing the threat.</p>
+          <div class="fact-row"><span>Initial access identified</span><b>29 Apr 2021</b></div><div class="fact-row"><span>Ransomware discovered</span><b>7 May 2021</b></div><div class="fact-row"><span>Pipeline restart announced</span><b>13 May 2021</b></div>
+        </article>
+        <article class="panel finding-panel"><span class="eyebrow">KEY RISK MANAGEMENT FINDING</span><h3>Cyber risk became<br><em>operational risk.</em></h3><p>The attack affected business IT. The company halted pipeline operations to reduce the risk of further compromise and protect operational technology.</p><div class="finding-bottom"><b>IT SECURITY</b><span>→</span><b>CONTINUITY OF FUEL SUPPLY</b></div></article>
+      </div>
+    </section>
+
+    <section id="register" class="section">
+      <div class="section-head"><div><span class="eyebrow">02 / PRIMARY ANALYSIS</span><h2>Risk register</h2><p class="subhead">Prioritized risks, evidence, scoring rationale and recommended treatment.</p></div><button class="button" id="exportCsv">↓ Export CSV</button></div>
+      <div class="register-summary"><div><b id="riskCount">8</b><span>Risks assessed</span></div><div><b id="criticalCount">4</b><span>Critical</span></div><div><b id="highCount">4</b><span>High</span></div><div><b>1–5</b><span>Likelihood / impact scale</span></div></div>
+      <div class="table-tools"><input id="searchRisk" type="search" placeholder="Search risk, evidence or control…"><select id="severityFilter"><option value="all">All priorities</option><option>Critical</option><option>High</option><option>Moderate</option><option>Low</option></select><select id="categoryFilter"><option value="all">All categories</option><option>Access control</option><option>Malware</option><option>IT / OT security</option><option>Business continuity</option><option>Data protection</option><option>Third-party</option><option>Recovery</option></select></div>
+      <div class="table-wrap"><table id="riskTable"><thead><tr><th>ID / RISK</th><th>CATEGORY</th><th>LIKELIHOOD</th><th>IMPACT</th><th>SCORE</th><th>PRIORITY</th><th>RESPONSE</th></tr></thead><tbody id="riskRows"></tbody></table></div>
+      <p class="table-hint">Select any risk row to view its evidence, rationale and recommended controls. Scores are analyst-assessed, not official Colonial Pipeline scores.</p>
+    </section>
+
+    <section id="matrix" class="section">
+      <div class="section-head"><div><span class="eyebrow">03 / QUANTITATIVE VIEW</span><h2>Likelihood × impact matrix</h2><p class="subhead">A 5 × 5 qualitative risk matrix using the scores in the register.</p></div><span class="source-tag">INHERENT RISK / BEFORE TREATMENT</span></div>
+      <div class="matrix-layout panel"><div><div class="matrix-caption"><b>IMPACT ↑</b><span>LIKELIHOOD →</span></div><div id="heatmap" class="heatmap"></div><div class="axis-labels"><span>Rare</span><span>Unlikely</span><span>Possible</span><span>Likely</span><span>Almost certain</span></div></div><aside class="matrix-legend"><h3>Risk bands</h3><div><i class="swatch critical"></i><span><b>Critical</b><small>17–25</small></span></div><div><i class="swatch high"></i><span><b>High</b><small>10–16</small></span></div><div><i class="swatch moderate"></i><span><b>Moderate</b><small>5–9</small></span></div><div><i class="swatch low"></i><span><b>Low</b><small>1–4</small></span></div><p>Numbers inside cells show how many risks occupy that likelihood / impact combination. Click a populated cell to filter the register.</p></aside></div>
+    </section>
+
+    <section id="analysis" class="section">
+      <div class="section-head"><div><span class="eyebrow">04 / ANALYTICS</span><h2>Where the exposure concentrates</h2><p class="subhead">Derived views of the assessed risk register, not measured incident telemetry.</p></div></div>
+      <div class="charts-grid">
+        <article class="panel chart-panel"><div class="panel-title"><h3>Risk score by exposure</h3><span class="mini-label">MAX 25</span></div><canvas id="scoreChart" height="250"></canvas></article>
+        <article class="panel chart-panel"><div class="panel-title"><h3>Priority distribution</h3><span class="mini-label">8 ASSESSED RISKS</span></div><canvas id="priorityChart" height="250"></canvas></article>
+      </div>
+      <div class="insight-grid"><article class="insight"><span class="eyebrow">01 / ROOT CAUSE</span><b>Identity and access</b><p>Legacy remote access without a one-time passcode created the initial access path.</p></article><article class="insight"><span class="eyebrow">02 / AMPLIFIER</span><b>IT / OT dependency</b><p>Uncertainty about the boundary between business IT and operational systems contributed to the precautionary shutdown.</p></article><article class="insight"><span class="eyebrow">03 / CONSEQUENCE</span><b>Continuity of service</b><p>Pipeline service interruption translated a cyber incident into a fuel-supply disruption.</p></article></div>
+      <div class="panel cia-panel"><div><span class="eyebrow">CIA TRIAD / CASE INTERPRETATION</span><h3>Availability was directly affected.</h3><p>The supplied case study describes confidentiality as a serious concern due to extortion and reported data-theft risk. It does not establish pipeline-control tampering; integrity impact therefore remains unconfirmed in the available case material.</p></div><div class="cia-bars"><div><span>Confidentiality <b>Serious concern</b></span><i><u style="width:78%"></u></i></div><div><span>Integrity <b>Unconfirmed</b></span><i><u style="width:34%"></u></i></div><div><span>Availability <b>Confirmed impact</b></span><i><u style="width:96%"></u></i></div><small>Bars are qualitative communication aids, not measured percentages.</small></div></div>
+    </section>
+
+    <section id="controls" class="section">
+      <div class="section-head"><div><span class="eyebrow">05 / RISK TREATMENT</span><h2>Mitigation and control plan</h2><p class="subhead">Controls mapped to the failure paths highlighted by the incident.</p></div></div>
+      <div class="control-table table-wrap"><table><thead><tr><th>PRIORITY</th><th>CONTROL ACTION</th><th>RISK ADDRESSED</th><th>SUCCESS MEASURE</th></tr></thead><tbody>
+        <tr><td><span class="priority-dot urgent"></span> Immediate</td><td><b>Enforce MFA on all remote access; disable dormant and legacy accounts; rotate exposed credentials.</b></td><td>VPN compromise / credential abuse</td><td>MFA coverage; inactive accounts removed</td></tr>
+        <tr><td><span class="priority-dot urgent"></span> Immediate</td><td><b>Review privileged access and apply least privilege with separate administrative accounts.</b></td><td>Unauthorized access / privilege misuse</td><td>Privileged-account review completion</td></tr>
+        <tr><td><span class="priority-dot high"></span> Short term</td><td><b>Segment IT from OT; restrict and monitor approved conduits between environments.</b></td><td>Lateral movement / IT–OT exposure</td><td>Segmentation tests passed</td></tr>
+        <tr><td><span class="priority-dot high"></span> Short term</td><td><b>Maintain offline or immutable backups and regularly test clean restoration.</b></td><td>Ransomware / recovery failure</td><td>Restore time; successful restore tests</td></tr>
+        <tr><td><span class="priority-dot high"></span> Ongoing</td><td><b>Centralize logs; alert on anomalous VPN access; rehearse incident response and manual operations.</b></td><td>Detection delay / service disruption</td><td>Mean time to detect; exercise outcomes</td></tr>
+        <tr><td><span class="priority-dot normal"></span> Ongoing</td><td><b>Review third-party access, patch exposed systems and train staff on credential hygiene.</b></td><td>Third-party / endpoint compromise</td><td>Access reviews; patch compliance</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="timeline" class="section">
+      <div class="section-head"><div><span class="eyebrow">06 / INCIDENT SEQUENCE</span><h2>Key events</h2><p class="subhead">Dates documented in official statements and the supplied case study.</p></div></div>
+      <div class="timeline panel"><div class="event"><time>29 APR 2021</time><b>Initial access</b><p>Legacy VPN profile accessed using employee credentials; no one-time passcode required.</p></div><div class="event"><time>7 MAY 2021</time><b>Ransomware discovered</b><p>DarkSide ransomware identified; pipeline operations proactively shut down.</p></div><div class="event"><time>8 MAY 2021</time><b>Ransom payment</b><p>Approximately 75 BTC, reported at about $4.3–$4.4 million, paid.</p></div><div class="event"><time>10 MAY 2021</time><b>FBI attribution</b><p>FBI confirmed DarkSide was responsible for the network compromise.</p></div><div class="event"><time>13 MAY 2021</time><b>Pipeline restart</b><p>Colonial announced the entire pipeline system had restarted.</p></div><div class="event"><time>7 JUN 2021</time><b>DOJ seizure</b><p>DOJ announced seizure of 63.7 BTC valued at approximately $2.3 million.</p></div></div>
+    </section>
+
+    <footer class="footer"><div><b>COLONIAL PIPELINE / SECURITY RISK REVIEW</b><p>Academic analysis · Historical incident · Not an official Colonial Pipeline risk assessment.</p></div><div class="references"><b>PRIMARY & GOVERNMENT SOURCES</b>
+      <a href="https://www.fbi.gov/news/press-releases/fbi-statement-on-compromise-of-colonial-pipeline-networks/layout_view" target="_blank" rel="noreferrer">FBI — DarkSide attribution (10 May 2021)</a>
+      <a href="https://www.energy.gov/ceser/colonial-pipeline-cyber-incident" target="_blank" rel="noreferrer">U.S. Department of Energy — Incident and restart</a>
+      <a href="https://www.justice.gov/archives/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside" target="_blank" rel="noreferrer">DOJ — $2.3M cryptocurrency seizure</a>
+      <a href="https://www.govinfo.gov/content/pkg/CHRG-117hhrg45085/html/CHRG-117hhrg45085.htm" target="_blank" rel="noreferrer">U.S. House hearing — Colonial testimony and attack details</a>
+      <a href="https://www.transportation.gov/media/4496" target="_blank" rel="noreferrer">U.S. DOT — Pipeline scale and fuel-market impact</a>
+      <a href="https://www.gao.gov/products/gao-21-105263" target="_blank" rel="noreferrer">GAO — Pipeline cybersecurity oversight</a>
+      <p class="method-note">Method: factual incident details are source-derived. Likelihood, impact, risk scores and priority bands are qualitative analyst judgments made for this dashboard. They are not official company scores or actuarial probabilities. Risk scoring = likelihood (1–5) × impact (1–5).</p>
+    </div></footer>
+  </main>
+
+  <dialog id="riskDialog"><button class="dialog-close" id="closeDialog" aria-label="Close">×</button><span class="eyebrow" id="detailId">RISK DETAIL</span><h2 id="detailTitle"></h2><div id="detailBadge"></div><div class="detail-score" id="detailScore"></div><h3>Evidence / case connection</h3><p id="detailEvidence"></p><h3>Scoring rationale</h3><p id="detailRationale"></p><h3>Recommended treatment</h3><p id="detailTreatment"></p></dialog>
+  <script src="script.js"></script>
+</body></html>
